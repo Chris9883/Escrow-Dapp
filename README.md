@@ -9,7 +9,7 @@ Escrow Dapp to enable Escrow Agreements on-chain.
 By creating a new escrow agreement, the depositor names the beneficiary, an independent arbiter and locks a certain amount in the Escrow Contract. The locked amount will be transferred to the beneficiary when the agreement is fulfilled.  
 To verify that the agreement has been fulfilled, the arbiter has to approve the payout. Likewise if the agreement fails, the arbiter has to revoke the agreement and the deposit is transferred back to the depositor.
 
-# Demo
+## Demo
 
 https://escrow-dapp-weld.vercel.app/
 
