@@ -1,70 +1,102 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
-  background-color: #eee;
-  display: flex;
-  font-family: 'Muli', sans-serif;
+  font-family: "Muli", sans-serif;
 }
 
-.contract, .existing-contracts {
-  margin: 20px;
-  display: inline-block;
-  padding: 40px;
+main {
+  min-height: 100vh;
+  background-image: radial-gradient(
+    circle,
+    #0e314e,
+    #20233a,
+    #201825,
+    #170e14,
+    #000000
+  );
+}
+
+.contract,
+.existing-contracts {
   border: 1px solid #ddd;
-  background-color: #fff;
+  border-radius: 20px;
 }
 
-h1 {
+h2 {
   margin: 10px;
   padding: 10px;
   border-bottom: 1px solid #eee;
 }
 
+form {
+  align-items: center;
+}
+
 label {
+  width: 100%;
   display: flex;
   flex-direction: column;
   text-transform: uppercase;
   color: #aaa;
-  margin: 20px;
-}
-
-input[type="text"] {
-  padding: 6px;
-  font-size: 18px;
-}
-
-.button {
-  background-color: #f58427;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 20px;
-  padding: 9px 25px;
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-.existing-contract ul {
-  padding: 10px;
-  margin: 20px;
-  background-color: #eee;
-}
-
-.existing-contract ul > li {
-  list-style: none;
-  display: flex;
   margin: 10px;
 }
 
-.existing-contract ul > li > div {
-  margin: 0 5px;
+input[type="text"] {
+  width: 100%;
+  font-size: 18px;
 }
 
-.existing-contract ul > li > :first-child {
+.btn-primary {
+  min-width: 90px;
+}
+.escrow-container {
+  overflow: scroll;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+#card {
+  min-width: 300px;
+}
+
+.card-body {
+  align-items: center;
+}
+
+.card-text {
+  padding: 0;
+  margin: 0;
+}
+
+.card-text-info {
+  width: fit-content;
+  font-size: 0.9rem;
+}
+
+.display-amount {
   font-weight: bold;
+  padding-left: 15px;
 }
 
-.existing-contract .complete {
-  color: #5aa75a;
-  text-align: center;
+.display-address {
+  font-size: 0.8rem;
 }
