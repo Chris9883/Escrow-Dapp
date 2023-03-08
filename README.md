@@ -5,7 +5,8 @@ Week 5 project submission for the Alchemy University Blockchain Developer Bootca
 ## Description
 
 Escrow Dapp to enable Escrow Agreements on-chain.
-By creating a new escrow agreement, the depositor names the beneficiary, an independent arbiter and locks a certain amount in the Escrow Contract. The locked amount will be transferred to the beneficiary when the agreement is fulfilled.
+
+By creating a new escrow agreement, the depositor names the beneficiary, an independent arbiter and locks a certain amount in the Escrow Contract. The locked amount will be transferred to the beneficiary when the agreement is fulfilled.  
 To verify that the agreement has been fulfilled, the arbiter has to approve the payout. Likewise if the agreement fails, the arbiter has to revoke the agreement and the deposit is transferred back to the depositor.
 
 # Demo
@@ -15,13 +16,15 @@ https://escrow-dapp-weld.vercel.app/
 ## Implementation
 
 The escrow functionality relies on a single smart contract, in which escrow agreements are represented as a mapping, instead of deploying a new contract for every escrow agreement.
+
 Benefits: more gas-efficient, persistence (existing escrow agreements can be accessed via event logs)
+
 The contract is deployed on [goerli testnet](https://goerli.etherscan.io/address/0x196C2Ae4C84dDBC12F7986F108aBb0062D145DC5).
 
 ## Security considerations
 
 - Smart contract is not owned and there is no withdraw function --> funds can not be stolen
-- BUT: The success of an escrow agreement depends largely on the reliability of the independent arbiter. If the arbiter fails to to approve or revoke the agreement or loses their private key, the deposited amount stays locked in the contract forever! :scream:
+- BUT: The success of an escrow agreement depends largely on the reliability of the independent arbiter. If the arbiter fails to to approve or revoke the agreement or loses their private key, the deposited amount stays locked in the contract.
 
 ## Project Layout
 
