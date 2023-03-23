@@ -11,7 +11,7 @@ To verify that the agreement has been fulfilled, the arbiter has to approve the 
 
 ## Demo
 
-https://escrow-dapp-weld.vercel.app/
+https://escrow-dapp-kappa.vercel.app/
 
 ## Implementation
 
