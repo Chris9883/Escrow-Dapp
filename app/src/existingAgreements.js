@@ -5,8 +5,11 @@ import { contractAddress, abi } from "./constants/contractInfo";
 const { REACT_APP_ALCHEMY_API_KEY } = process.env;
 
 const url = `https://eth-goerli.g.alchemy.com/v2/${REACT_APP_ALCHEMY_API_KEY}`;
-
-async function getExistingAgreements(setEscrows, provider) {
+const provider = new ethers.providers.AlchemyProvider(
+  "goerli",
+  REACT_APP_ALCHEMY_API_KEY
+);
+async function getExistingAgreements(setEscrows) {
   try {
     const response = await axios.post(url, {
       jsonrpc: "2.0",
@@ -38,6 +41,7 @@ async function getExistingAgreements(setEscrows, provider) {
         },
       ],
     });
+
     const revokedResponse = await axios.post(url, {
       jsonrpc: "2.0",
       id: 0,
@@ -79,9 +83,17 @@ async function getExistingAgreements(setEscrows, provider) {
         agreement.status = "";
       }
       agreement.lockedAmount = "";
-      const contract = new ethers.Contract(contractAddress, abi, provider);
-      const lockedAmount = await contract.getLockedAmount(agreement.id);
-      agreement.lockedAmount = ethers.utils.formatUnits(lockedAmount, "ether");
+      try {
+        const contract = new ethers.Contract(contractAddress, abi, provider);
+        const lockedAmount = await contract.getLockedAmount(agreement.id);
+        agreement.lockedAmount = ethers.utils.formatUnits(
+          lockedAmount,
+          "ether"
+        );
+      } catch (e) {
+        console.error(e);
+      }
+
       existingAgreements.push(agreement);
     }
     existingAgreements.reverse();

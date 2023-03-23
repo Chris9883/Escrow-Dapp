@@ -13,12 +13,12 @@ function App() {
   const [waitForTx, setWaitForTx] = useState(false);
 
   async function getAccounts() {
-    const accounts = await provider.send("eth_requestAccounts", []);
+    await provider.send("eth_requestAccounts", []);
     setSigner(provider.getSigner());
   }
 
   useEffect(() => {
-    getExistingAgreements(setEscrows, provider);
+    getExistingAgreements(setEscrows);
   }, []);
 
   async function newAgreement() {
@@ -29,8 +29,8 @@ function App() {
     if (
       // user input validation
       value <= 0 ||
-      beneficiary.length != 42 ||
-      arbiter.length != 42 ||
+      beneficiary.length !== 42 ||
+      arbiter.length !== 42 ||
       !beneficiary.startsWith("0x") ||
       !arbiter.startsWith("0x")
     ) {
@@ -49,7 +49,7 @@ function App() {
         const txReceipt = await tx.wait();
         setStatus("success");
         setEscrowId(parseInt(txReceipt.logs[0].data));
-        getExistingAgreements(setEscrows, provider);
+        getExistingAgreements(setEscrows);
       } catch (e) {
         setStatus("error");
 
@@ -100,13 +100,13 @@ function App() {
               <button className="btn btn-primary" onClick={getAccounts}>
                 Connect Wallet
               </button>
-            ) : status == "pending" ? (
+            ) : status === "pending" ? (
               <button className="btn btn-primary" disabled>
                 <div className="spinner-border spinner-border-sm" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </div>
               </button>
-            ) : status == "success" ? (
+            ) : status === "success" ? (
               <>
                 <p>
                   <span className="text-success">Success!</span> <br />
@@ -131,13 +131,13 @@ function App() {
             <div className="container escrow-container mt-lg-3 mt-2">
               {escrows.map((escrow) => {
                 return (
-                  <div className="card" id="card" key={escrow.id}>
+                  <div className="card" key={escrow.id}>
                     <div className="card-body d-flex flex-column">
                       <div className="container-fluid px-2 d-flex justify-content-between">
                         <h5 className="card-title text-center">
                           ID {escrow.id}{" "}
                         </h5>
-                        {escrow.lockedAmount != "" && (
+                        {escrow.lockedAmount !== "" && (
                           <p className="display-amount text-primary">
                             {escrow.lockedAmount} ETH
                           </p>
@@ -163,11 +163,11 @@ function App() {
                           {escrow.arbiter}
                         </p>
                       </div>
-                      {escrow.status == "approved" ? (
+                      {escrow.status === "approved" ? (
                         <p className="text-success">Approved!</p>
-                      ) : escrow.status == "revoked" ? (
+                      ) : escrow.status === "revoked" ? (
                         <p className="text-danger">Revoked!</p>
-                      ) : waitForTx == true ? (
+                      ) : waitForTx === true ? (
                         <div
                           className="spinner-border text-secondary"
                           role="status"
@@ -184,7 +184,7 @@ function App() {
                                 await getAccounts();
                               } else {
                                 await approve(escrow.id, signer, setWaitForTx);
-                                getExistingAgreements(setEscrows, provider);
+                                getExistingAgreements(setEscrows);
                               }
                             }}
                           >
@@ -198,7 +198,7 @@ function App() {
                                 await getAccounts();
                               } else {
                                 await revoke(escrow.id, signer, setWaitForTx);
-                                getExistingAgreements(setEscrows, provider);
+                                getExistingAgreements(setEscrows);
                               }
                             }}
                           >

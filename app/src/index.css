@@ -34,12 +34,6 @@ main {
   );
 }
 
-.contract,
-.existing-contracts {
-  border: 1px solid #ddd;
-  border-radius: 20px;
-}
-
 h2 {
   margin: 10px;
   padding: 10px;
@@ -67,6 +61,7 @@ input[type="text"] {
 .btn-primary {
   min-width: 90px;
 }
+
 .escrow-container {
   overflow: scroll;
   display: flex;
@@ -74,7 +69,7 @@ input[type="text"] {
   gap: 20px;
 }
 
-#card {
+.card {
   min-width: 300px;
 }
 
